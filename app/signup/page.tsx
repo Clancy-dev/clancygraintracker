@@ -7,7 +7,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import Image from "next/image"
 import Link from "next/link"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
-import { AlertCircle } from "lucide-react"
+import { AlertCircle, Wheat } from "lucide-react"
 import SignupForm from "@/components/auth/signup-form"
 
 export default function SignupPage() {
@@ -45,7 +45,8 @@ export default function SignupPage() {
       <div className="max-w-md w-full space-y-8">
         <div className="text-center">
           <div className="flex justify-center">
-            <Image src="/logo.png" alt="Grain Tracker Logo" width={80} height={80} className="mx-auto" />
+            <Wheat className="h-6 w-6 text-amber-500" />
+            {/* <Image src="/logo.png" alt="Grain Tracker Logo" width={80} height={80} className="mx-auto" /> */}
           </div>
           <h2 className="mt-6 text-3xl font-extrabold text-gray-900">Grain Tracker</h2>
           <p className="mt-2 text-sm text-gray-600">

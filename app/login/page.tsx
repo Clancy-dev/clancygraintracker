@@ -6,6 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import Image from "next/image"
 import Link from "next/link"
 import LoginForm from "@/components/auth/login-form"
+import { Wheat } from "lucide-react"
 
 export default function LoginPage() {
   const [hasUsers, setHasUsers] = useState(true)
@@ -22,7 +23,8 @@ export default function LoginPage() {
       <div className="max-w-md w-full space-y-8">
         <div className="text-center">
           <div className="flex justify-center">
-            <Image src="/logo.png" alt="Grain Tracker Logo" width={80} height={80} className="mx-auto" />
+            <Wheat className="h-6 w-6 text-amber-500" />
+            {/* <Image src="/logo.png" alt="Grain Tracker Logo" width={80} height={80} className="mx-auto" /> */}
           </div>
           <h2 className="mt-6 text-3xl font-extrabold text-gray-900">Grain Tracker</h2>
           <p className="mt-2 text-sm text-gray-600">Sign in to your account to manage your maize business</p>

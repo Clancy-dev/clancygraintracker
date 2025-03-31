@@ -288,7 +288,7 @@ export default function SalesTracker() {
               Record Sale
             </Button>
           </DialogTrigger>
-          <DialogContent>
+          <DialogContent className="bg-white">
             <DialogHeader>
               <DialogTitle>Record New Sale</DialogTitle>
               <DialogDescription>Record a new sale of maize</DialogDescription>

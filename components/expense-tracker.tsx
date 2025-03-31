@@ -102,7 +102,7 @@ export default function ExpenseTracker() {
               Add Expense
             </Button>
           </DialogTrigger>
-          <DialogContent>
+          <DialogContent className="bg-white">
             <DialogHeader>
               <DialogTitle>Add New Expense</DialogTitle>
               <DialogDescription>Record a new expense for your maize business</DialogDescription>
@@ -136,7 +136,7 @@ export default function ExpenseTracker() {
                   <SelectTrigger id="category">
                     <SelectValue placeholder="Select category" />
                   </SelectTrigger>
-                  <SelectContent>
+                  <SelectContent className="bg-white">
                     <SelectItem value="fuel">Fuel</SelectItem>
                     <SelectItem value="labor">Labor</SelectItem>
                     <SelectItem value="transportation">Transportation</SelectItem>
@@ -241,7 +241,7 @@ export default function ExpenseTracker() {
               <SelectTrigger className="w-full md:w-[180px]">
                 <SelectValue placeholder="Filter by category" />
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent className="bg-white">
                 <SelectItem value="all">All Categories</SelectItem>
                 <SelectItem value="fuel">Fuel</SelectItem>
                 <SelectItem value="labor">Labor</SelectItem>

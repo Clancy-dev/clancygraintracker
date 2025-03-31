@@ -1,12 +1,19 @@
-import { Suspense } from "react"
-import LoadingScreen from "@/components/loading-screen"
-import Dashboard from "@/components/dashboard"
+import { redirect } from "next/navigation"
 
 export default function Home() {
-  return (
-    <Suspense fallback={<LoadingScreen />}>
-      <Dashboard />
-    </Suspense>
-  )
+  // Check if any users exist, if not redirect to signup, otherwise to login
+  if (typeof window !== "undefined") {
+    const storedUsers = localStorage.getItem("grainTrackerUsers")
+    const users = storedUsers ? JSON.parse(storedUsers) : []
+
+    if (users.length === 0) {
+      redirect("/signup")
+    } else {
+      redirect("/login")
+    }
+  }
+
+  // This will only run on the server
+  redirect("/login")
 }
 

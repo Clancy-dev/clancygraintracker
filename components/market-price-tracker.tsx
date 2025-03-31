@@ -166,7 +166,7 @@ export default function MarketPriceTracker() {
               Add Price
             </Button>
           </DialogTrigger>
-          <DialogContent>
+          <DialogContent className="bg-white">
             <DialogHeader>
               <DialogTitle>Record Market Price</DialogTitle>
               <DialogDescription>Track maize prices in different markets</DialogDescription>

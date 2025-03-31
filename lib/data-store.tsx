@@ -4,6 +4,8 @@ import type React from "react"
 
 import { createContext, useContext, useState, useEffect, type ReactNode } from "react"
 import type { AppData, HistoryEntry } from "@/lib/types"
+// import { addToRecycleBin } from "./recycle-bin"
+import { useAuth } from "./auth-context"
 
 // Initial data structure
 const initialData: AppData = {
@@ -159,6 +161,8 @@ const initialData: AppData = {
       details: { source: "Mbale Farmers", quantity: 500, pricePerKg: 1200 },
     },
   ],
+  users: [],
+  deletedItems: [],
 }
 
 interface DataContextType {
@@ -166,6 +170,7 @@ interface DataContextType {
   updateData: (newData: AppData) => void
   addHistoryEntry: (entry: Omit<HistoryEntry, "id">) => void
   getHistoryForDate: (date: Date) => HistoryEntry[]
+  deleteItem: (itemType: "expense" | "sale" | "inventory" | "debt" | "marketPrice", id: string) => void
 }
 
 // Create context
@@ -197,6 +202,7 @@ interface DataProviderProps {
 // Provider component
 export function DataProvider({ children }: DataProviderProps) {
   const [data, setData] = useState<AppData>(initialData)
+  const { user } = useAuth()
 
   useEffect(() => {
     // Load data from localStorage on mount
@@ -241,6 +247,8 @@ export function DataProvider({ children }: DataProviderProps) {
                   date: new Date(entry.date),
                 }))
               : [],
+            users: parsedData.users || [],
+            deletedItems: parsedData.deletedItems || [],
           }
 
           setData(processedData)
@@ -288,8 +296,52 @@ export function DataProvider({ children }: DataProviderProps) {
     })
   }
 
+  // Delete an item and add it to the recycle bin
+  const deleteItem = (itemType: "expense" | "sale" | "inventory" | "debt" | "marketPrice", id: string): void => {
+    let itemToDelete: any = null
+    const updatedData = { ...data }
+
+    // Find the item to delete based on type
+    switch (itemType) {
+      case "expense":
+        itemToDelete = data.expenses.find((item) => item.id === id)
+        updatedData.expenses = data.expenses.filter((item) => item.id !== id)
+        break
+      case "sale":
+        itemToDelete = data.sales.find((item) => item.id === id)
+        updatedData.sales = data.sales.filter((item) => item.id !== id)
+        break
+      case "inventory":
+        itemToDelete = data.inventory.find((item) => item.id === id)
+        updatedData.inventory = data.inventory.filter((item) => item.id !== id)
+        break
+      case "debt":
+        // Check both debtors and creditors
+        itemToDelete = data.debtors.find((item) => item.id === id)
+        if (itemToDelete) {
+          updatedData.debtors = data.debtors.filter((item) => item.id !== id)
+        } else {
+          itemToDelete = data.creditors.find((item) => item.id === id)
+          updatedData.creditors = data.creditors.filter((item) => item.id !== id)
+        }
+        break
+      case "marketPrice":
+        itemToDelete = data.marketPrices.find((item) => item.id === id)
+        updatedData.marketPrices = data.marketPrices.filter((item) => item.id !== id)
+        break
+    }
+
+    if (itemToDelete) {
+      // Add to recycle bin
+      addToRecycleBin(itemType, itemToDelete, user?.id || "unknown")
+
+      // Update data
+      updateData(updatedData)
+    }
+  }
+
   return (
-    <DataContext.Provider value={{ data, updateData, addHistoryEntry, getHistoryForDate }}>
+    <DataContext.Provider value={{ data, updateData, addHistoryEntry, getHistoryForDate, deleteItem }}>
       {children}
     </DataContext.Provider>
   )

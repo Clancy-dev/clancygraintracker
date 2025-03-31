@@ -130,7 +130,7 @@ export default function InventoryManagement() {
   const isLowInventory = totalInventory < lowInventoryThreshold
 
   return (
-    <div className="grid gap-4">
+    <div className="grid gap-4 ">
       <div className="flex items-center justify-between">
         <h2 className="text-2xl font-bold">Inventory Management</h2>
         <Dialog open={open} onOpenChange={setOpen}>
@@ -140,7 +140,7 @@ export default function InventoryManagement() {
               Add Inventory
             </Button>
           </DialogTrigger>
-          <DialogContent>
+          <DialogContent className="bg-white">
             <DialogHeader>
               <DialogTitle>Add New Inventory</DialogTitle>
               <DialogDescription>Record a new maize inventory purchase</DialogDescription>

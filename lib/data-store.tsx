@@ -6,6 +6,7 @@ import { createContext, useContext, useState, useEffect, type ReactNode } from "
 import type { AppData, HistoryEntry } from "@/lib/types"
 // import { addToRecycleBin } from "./recycle-bin"
 import { useAuth } from "./auth-context"
+import { addToRecycleBin } from "./recycle-bin"
 
 // Initial data structure
 const initialData: AppData = {

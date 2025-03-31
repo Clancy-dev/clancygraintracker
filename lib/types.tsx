@@ -58,6 +58,8 @@ export interface Expense {
     creditors: Debt[]
     marketPrices: MarketPrice[]
     history: HistoryEntry[]
+    users: { id: string; name: string; email: string }[]; // Added users property
+    deletedItems: any[]; // Add this property to match the usage in your code
   }
   
   export interface DateRange {

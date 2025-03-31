@@ -82,7 +82,7 @@ export default function AdminDashboard() {
   return (
     <div className="flex min-h-screen flex-col">
       {/* Mobile Header */}
-      <header className="sticky top-0 z-10 flex h-16 items-center gap-4 border-b bg-background px-4 md:hidden">
+      <header className="sticky top-0 z-10 flex h-16 items-center gap-4 border-b  px-4 md:hidden bg-white">
         <Wheat className="h-6 w-6 text-amber-500" />
         <h1 className="font-semibold">Grain Tracker</h1>
         <DropdownMenu>
@@ -97,7 +97,7 @@ export default function AdminDashboard() {
               <span className="sr-only">Menu</span>
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
+          <DropdownMenuContent align="end" className="bg-white">
             <DropdownMenuLabel>Navigation</DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem onClick={() => setActiveTab("dashboard")}>Dashboard</DropdownMenuItem>

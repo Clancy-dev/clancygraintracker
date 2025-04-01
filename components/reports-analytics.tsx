@@ -1,15 +1,10 @@
 "use client"
 
 import { useState, useRef } from "react"
-import { CalendarIcon, Download, Printer, X } from "lucide-react"
+import { Download, Printer, X, FileText } from "lucide-react"
 import { format, subMonths } from "date-fns"
 import { Button } from "@/components/ui/button"
-import { Calendar } from "@/components/ui/calendar"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
 import { toast } from "sonner"
 import { useAppData } from "@/lib/data-store"
 import { useAuth } from "@/lib/auth-context"
@@ -33,6 +28,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { jsPDF } from "jspdf"
 import html2canvas from "html2canvas"
+import { useRouter } from "next/navigation"
 
 export default function ReportsAnalytics() {
   const [dateRange, setDateRange] = useState<DateRange>({
@@ -47,6 +43,7 @@ export default function ReportsAnalytics() {
   const { data } = useAppData()
   const { user } = useAuth()
   const reportRef = useRef<HTMLDivElement>(null)
+  const router = useRouter()
 
   const handleGenerateReport = () => {
     setShowReport(true)
@@ -367,111 +364,28 @@ export default function ReportsAnalytics() {
 
       <Card>
         <CardHeader>
-          <CardTitle>Generate Report</CardTitle>
-          <CardDescription>Create custom reports for your business</CardDescription>
+          <CardTitle>Advanced Reporting</CardTitle>
+          <CardDescription>Generate professional reports with customizable formats and layouts</CardDescription>
         </CardHeader>
-        <CardContent>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            <div className="space-y-2">
-              <Label htmlFor="companyName">Company Name</Label>
-              <Input
-                id="companyName"
-                value={companyName}
-                onChange={(e) => setCompanyName(e.target.value)}
-                placeholder="Enter your company name"
-              />
+        <CardContent className="flex flex-col items-center">
+          <div className="w-full max-w-md">
+            <div className="relative mx-auto w-64 h-80 bg-white rounded-lg shadow-lg overflow-hidden mb-6">
+              <div className="absolute top-0 left-0 right-0 h-16 bg-amber-500">
+                <div className="mt-10 mx-4 h-4 bg-gray-200 rounded"></div>
+                <div className="mt-2 mx-4 h-4 bg-gray-200 rounded w-2/3"></div>
+              </div>
+              <div className="absolute top-20 left-0 right-0 bottom-0 p-4">
+                <div className="h-4 bg-gray-200 rounded mb-2"></div>
+                <div className="h-4 bg-gray-200 rounded mb-2 w-5/6"></div>
+                <div className="h-4 bg-gray-200 rounded mb-2 w-4/6"></div>
+                <div className="mt-4 h-20 bg-gray-200 rounded"></div>
+                <div className="mt-4 h-12 bg-gray-200 rounded"></div>
+                <div className="mt-4 h-12 bg-gray-200 rounded"></div>
+              </div>
             </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="companyInfo">Company Address</Label>
-              <Input
-                id="companyInfo"
-                value={companyInfo}
-                onChange={(e) => setCompanyInfo(e.target.value)}
-                placeholder="Enter company address"
-              />
-            </div>
-
-            <div className="space-y-2">
-              <label className="text-sm font-medium">Report Type</label>
-              <Select value={reportType} onValueChange={setReportType}>
-                <SelectTrigger>
-                  <SelectValue placeholder="Select report type" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="profit-loss">Profit & Loss</SelectItem>
-                  <SelectItem value="sales">Sales Report</SelectItem>
-                  <SelectItem value="expenses">Expense Report</SelectItem>
-                  <SelectItem value="inventory">Inventory Report</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-
-            <div className="space-y-2">
-              <label className="text-sm font-medium">Period</label>
-              <Select value={reportPeriod} onValueChange={setReportPeriod}>
-                <SelectTrigger>
-                  <SelectValue placeholder="Select period" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="daily">Daily</SelectItem>
-                  <SelectItem value="weekly">Weekly</SelectItem>
-                  <SelectItem value="monthly">Monthly</SelectItem>
-                  <SelectItem value="yearly">Yearly</SelectItem>
-                  <SelectItem value="custom">Custom Range</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-
-            <div className="space-y-2 sm:col-span-2 lg:col-span-4">
-              <label className="text-sm font-medium">Date Range</label>
-              <Popover>
-                <PopoverTrigger asChild>
-                  <Button variant="outline" className="w-full justify-start text-left font-normal">
-                    <CalendarIcon className="mr-2 h-4 w-4" />
-                    {dateRange.from ? (
-                      dateRange.to ? (
-                        <>
-                          {format(dateRange.from, "LLL dd, y")} - {format(dateRange.to, "LLL dd, y")}
-                        </>
-                      ) : (
-                        format(dateRange.from, "LLL dd, y")
-                      )
-                    ) : (
-                      "Select date range"
-                    )}
-                  </Button>
-                </PopoverTrigger>
-                <PopoverContent className="w-auto p-0" align="start">
-                  <Calendar
-                    mode="range"
-                    selected={dateRange}
-                    onSelect={(range) => {
-                      if (range && range.from) {
-                        setDateRange({
-                          from: range.from,
-                          to: range.to || range.from,
-                        })
-                      }
-                    }}
-                    initialFocus
-                  />
-                </PopoverContent>
-              </Popover>
-            </div>
-          </div>
-
-          <div className="flex flex-wrap gap-2 mt-4">
-            <Button onClick={handleGenerateReport} className="w-full sm:w-auto">
-              Generate Report
-            </Button>
-            <Button variant="outline" onClick={handleExportReport} className="w-full sm:w-auto">
-              <Download className="mr-2 h-4 w-4" />
-              Export PDF
-            </Button>
-            <Button variant="outline" onClick={handlePrintReport} className="w-full sm:w-auto">
-              <Printer className="mr-2 h-4 w-4" />
-              Print
+            <Button onClick={() => router.push("/report-generator")} className="w-full" size="lg">
+              <FileText className="mr-2 h-5 w-5" />
+              Create Professional Report
             </Button>
           </div>
         </CardContent>
@@ -523,13 +437,14 @@ export default function ReportsAnalytics() {
         </Card>
       </div>
 
+      {/* Update the chart containers to be responsive on small screens */}
       <div className="grid gap-4 sm:grid-cols-1 lg:grid-cols-2">
         <Card className="col-span-1 lg:col-span-2">
           <CardHeader>
             <CardTitle>Sales vs Expenses</CardTitle>
             <CardDescription>Comparison over time</CardDescription>
           </CardHeader>
-          <CardContent className="h-60 md:h-80">
+          <CardContent className="h-60 md:h-80 chart-container">
             <ResponsiveContainer width="100%" height="100%">
               <RechartsLineChart
                 data={salesVsExpensesData}
@@ -564,7 +479,7 @@ export default function ReportsAnalytics() {
             <CardTitle>Expense Breakdown</CardTitle>
             <CardDescription>By category</CardDescription>
           </CardHeader>
-          <CardContent className="h-60 md:h-80">
+          <CardContent className="h-60 md:h-80 chart-container">
             <ResponsiveContainer width="100%" height="100%">
               <RechartsPieChart>
                 <Pie
@@ -593,7 +508,7 @@ export default function ReportsAnalytics() {
             <CardTitle>Monthly Performance</CardTitle>
             <CardDescription>Profit trend by month</CardDescription>
           </CardHeader>
-          <CardContent className="h-60 md:h-80">
+          <CardContent className="h-60 md:h-80 chart-container">
             <ResponsiveContainer width="100%" height="100%">
               <RechartsBarChart
                 data={monthlyProfitData}

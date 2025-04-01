@@ -2,13 +2,12 @@
 
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
-// import SignupForm from "@/components/auth/signup-form"
+import SignupForm from "@/components/auth/signup-form"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import Image from "next/image"
 import Link from "next/link"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { AlertCircle, Wheat } from "lucide-react"
-import SignupForm from "@/components/auth/signup-form"
 
 export default function SignupPage() {
   const [isFirstUser, setIsFirstUser] = useState(true)
@@ -55,7 +54,7 @@ export default function SignupPage() {
         </div>
 
         {isFirstUser ? (
-          <Card>
+          <Card className="bg-white">
             <CardHeader>
               <CardTitle>Create Admin Account</CardTitle>
               <CardDescription>

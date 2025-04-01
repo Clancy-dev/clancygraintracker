@@ -258,7 +258,7 @@ export default function DebtorCreditor() {
                   <SelectTrigger id="type">
                     <SelectValue placeholder="Select type" />
                   </SelectTrigger>
-                  <SelectContent>
+                  <SelectContent className="bg-white">
                     <SelectItem value="debtor">Debtor (owes you)</SelectItem>
                     <SelectItem value="creditor">Creditor (you owe them)</SelectItem>
                   </SelectContent>
@@ -398,7 +398,7 @@ export default function DebtorCreditor() {
               <SelectTrigger className="w-full md:w-[180px]">
                 <SelectValue placeholder="Filter by status" />
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent className="bg-white">
                 <SelectItem value="all">All</SelectItem>
                 <SelectItem value="overdue">Overdue</SelectItem>
                 <SelectItem value="due-soon">Due Soon</SelectItem>

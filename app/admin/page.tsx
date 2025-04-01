@@ -4,8 +4,6 @@ import { useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { useAuth } from "@/lib/auth-context"
 import AdminDashboard from "@/components/admin/admin-dashboard"
-// import { useAuth } from "@/lib/auth-context"
-// import AdminDashboard from "@/components/admin/admin-dashboard"
 
 export default function AdminPage() {
   const { user, isAuthenticated, isLoading } = useAuth()

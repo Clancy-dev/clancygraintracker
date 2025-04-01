@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
-// import { useAuth } from "@/lib/auth-context"
+import { useAuth } from "@/lib/auth-context"
 import { useAppData } from "@/lib/data-store"
 import {
   BarChart3,
@@ -40,7 +40,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { useAuth } from "@/lib/auth-context"
 
 export default function AdminDashboard() {
   const [mounted, setMounted] = useState<boolean>(false)
@@ -82,7 +81,7 @@ export default function AdminDashboard() {
   return (
     <div className="flex min-h-screen flex-col">
       {/* Mobile Header */}
-      <header className="sticky top-0 z-10 flex h-16 items-center gap-4 border-b  px-4 md:hidden bg-white">
+      <header className="sticky top-0 z-10 flex h-16 items-center gap-4 border-b bg-background px-4 md:hidden">
         <Wheat className="h-6 w-6 text-amber-500" />
         <h1 className="font-semibold">Grain Tracker</h1>
         <DropdownMenu>
@@ -97,7 +96,7 @@ export default function AdminDashboard() {
               <span className="sr-only">Menu</span>
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className="bg-white">
+          <DropdownMenuContent align="end">
             <DropdownMenuLabel>Navigation</DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem onClick={() => setActiveTab("dashboard")}>Dashboard</DropdownMenuItem>
@@ -238,7 +237,7 @@ export default function AdminDashboard() {
                     </div>
                   </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="w-56 bg-white">
+                <DropdownMenuContent align="end" className="w-56">
                   <DropdownMenuLabel>My Account</DropdownMenuLabel>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem onClick={() => router.push("/profile")}>

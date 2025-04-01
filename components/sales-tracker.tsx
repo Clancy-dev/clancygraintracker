@@ -288,7 +288,7 @@ export default function SalesTracker() {
               Record Sale
             </Button>
           </DialogTrigger>
-          <DialogContent className="bg-white">
+          <DialogContent>
             <DialogHeader>
               <DialogTitle>Record New Sale</DialogTitle>
               <DialogDescription>Record a new sale of maize</DialogDescription>
@@ -410,7 +410,7 @@ export default function SalesTracker() {
           <CardDescription>Sales by date</CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="h-80 w-full">
+          <div className="h-80 w-full chart-container">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart
                 data={chartData}

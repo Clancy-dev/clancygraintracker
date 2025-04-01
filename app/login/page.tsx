@@ -1,11 +1,10 @@
 "use client"
 
 import { useEffect, useState } from "react"
-// import LoginForm from "@/components/auth/login-form"
+import LoginForm from "@/components/auth/login-form"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import Image from "next/image"
 import Link from "next/link"
-import LoginForm from "@/components/auth/login-form"
 import { Wheat } from "lucide-react"
 
 export default function LoginPage() {
@@ -30,7 +29,7 @@ export default function LoginPage() {
           <p className="mt-2 text-sm text-gray-600">Sign in to your account to manage your maize business</p>
         </div>
 
-        <Card>
+        <Card className="bg-white">
           <CardHeader>
             <CardTitle>Sign In</CardTitle>
             <CardDescription>Enter your credentials to access your account</CardDescription>

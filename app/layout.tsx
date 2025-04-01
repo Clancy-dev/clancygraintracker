@@ -3,9 +3,8 @@ import { Inter } from "next/font/google"
 import { ThemeProvider } from "@/components/theme-provider"
 import { SonnerProvider } from "@/components/sonner-provider"
 import { DataProvider } from "@/lib/data-store"
-// import { AuthProvider } from "@/lib/auth-context"
-import type { ReactNode } from "react"
 import { AuthProvider } from "@/lib/auth-context"
+import type { ReactNode } from "react"
 
 const inter = Inter({ subsets: ["latin"] })
 

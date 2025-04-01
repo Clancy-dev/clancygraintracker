@@ -159,7 +159,7 @@ export default function UserManagement() {
   }
 
   return (
-    <div className="container mx-auto py-8 px-4 bg-white">
+    <div className="container mx-auto py-8 px-4">
       <div className="mb-6">
         <Link href="/dashboard" className="flex items-center text-amber-600 hover:text-amber-700">
           <ArrowLeft className="mr-2 h-4 w-4" />
@@ -182,14 +182,14 @@ export default function UserManagement() {
                   Add User
                 </Button>
               </DialogTrigger>
-              <DialogContent className="bg-white">
+              <DialogContent>
                 <DialogHeader>
                   <DialogTitle>Add New User</DialogTitle>
                   <DialogDescription>Create a new user account with specific permissions</DialogDescription>
                 </DialogHeader>
 
-                <div className="grid gap-4 py-4 bg-white">
-                  <div className="grid gap-2 bg-white">
+                <div className="grid gap-4 py-4">
+                  <div className="grid gap-2">
                     <Label htmlFor="name">Full Name</Label>
                     <Input
                       id="name"

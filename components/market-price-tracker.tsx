@@ -166,7 +166,7 @@ export default function MarketPriceTracker() {
               Add Price
             </Button>
           </DialogTrigger>
-          <DialogContent className="bg-white">
+          <DialogContent>
             <DialogHeader>
               <DialogTitle>Record Market Price</DialogTitle>
               <DialogDescription>Track maize prices in different markets</DialogDescription>
@@ -329,7 +329,7 @@ export default function MarketPriceTracker() {
           </div>
         </CardHeader>
         <CardContent>
-          <div className="h-60 w-full mb-6">
+          <div className="h-60 w-full mb-6 chart-container">
             <ResponsiveContainer width="100%" height="100%">
               <RechartsLineChart
                 data={chartData}
